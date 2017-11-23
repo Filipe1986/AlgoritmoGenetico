@@ -23,19 +23,26 @@ public class IA {
 			
 		}
 		
-		
-		Collections.shuffle(disciplinas);
-		
 		//Criacao populacao
-		Populacao populacao = null;
-		for(int i = 0; i < 10; i++){
-			populacao.add(new Individuo(disciplinas, salas));
+		Populacao populacao = new Populacao();
+		for(int i = 0; i < 100; i++){
+			Collections.shuffle(disciplinas);
+			
+			Individuo ind = new Individuo(disciplinas, salas);
+			
+			
+			populacao.add(ind);
+			populacao.avaliacao();
+
+			
 		}
 		
 		
-		
+
 		//Avaliacao das populacoes - Penalizacao por violacao
 		populacao.avaliacao();
+		System.out.println("fitness tamanho pop : "+ populacao.getFitnessTamanho());
+		System.out.println("fitness tipo pop: "+ populacao.getFitnessTipo());
 		//Cruzamento - Elitista para
 		populacao.cruzamento();
 		

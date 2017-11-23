@@ -13,7 +13,7 @@ public class DAO {
 
 		Workbook workbook = null;
 		try {
-			workbook = Workbook.getWorkbook(new File("tabela_sala1.xls"));
+			workbook = Workbook.getWorkbook(new File("tabela_sala.xls"));
 		} catch (BiffException | IOException e) {
 			e.printStackTrace();
 		}
