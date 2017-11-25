@@ -1,3 +1,4 @@
+package Modelo;
 
 public class Disciplina {
 
@@ -21,7 +22,7 @@ public class Disciplina {
 	@Override
 	public String toString() {
 
-		return "Disciplina nome: "+ nome + " curso: " + curso + " tipoSala: "+ tipoSala+" Números de alunos "+ maxAlunos + "\n" ;
+		return nome + " / Numeros de alunos "+ maxAlunos + " / curso: " + curso + " / tipoSala: "+ tipoSala  ;
 	}
 
 

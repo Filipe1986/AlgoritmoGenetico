@@ -1,3 +1,4 @@
+package Modelo;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -38,9 +39,6 @@ public class Populacao {
 		this.fitnessTipo = fitnessTipo / populacao.size();
 		
 	}
-	
-	
-
 
 
 	public int getFitnessTamanho() {
@@ -58,8 +56,6 @@ public class Populacao {
 		//Cruza individuos
 		
 	}
-
-
 
 	public void selecao() {
 		// TODO

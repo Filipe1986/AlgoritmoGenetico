@@ -1,3 +1,4 @@
+package Modelo;
 
 public class Sala {
 	
@@ -39,7 +40,7 @@ public class Sala {
 	@Override
 	public String toString() {
 		
-		return nome + "- Capacidade: " + capacidade + " tipo: "+ tipo + "\n" ;
+		return nome + " / Capacidade: " + capacidade + " / tipo: "+ tipo;
 	}
 	
 }

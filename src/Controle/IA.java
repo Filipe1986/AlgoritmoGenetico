@@ -1,7 +1,13 @@
+package Controle;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import DAO.DAO;
+import Modelo.Disciplina;
+import Modelo.Individuo;
+import Modelo.Populacao;
+import Modelo.Sala;
 import jxl.read.biff.BiffException;
 
 public class IA {
@@ -13,9 +19,10 @@ public class IA {
 		 
 		ArrayList <Disciplina> disciplinas = null;
 		ArrayList< Sala> salas = null;
-		
-		salas = DAO.populaSala(salas);
-		disciplinas = DAO.populaDisciplinas(disciplinas);
+		String arquivoSala = "tabela_sala.xls";
+		salas = DAO.populaSala(arquivoSala);
+		String arqvuivoDisciplina = "tabela_disciplina.xls";
+		disciplinas = DAO.populaDisciplinas(arqvuivoDisciplina);
 		
 		if(disciplinas.size() > salas.size()){
 			System.err.println("Solução impossível pois o numero de disciplinas é maior do que o de salas \n"
@@ -25,10 +32,10 @@ public class IA {
 		
 		//Criacao populacao
 		Populacao populacao = new Populacao();
-		for(int i = 0; i < 100; i++){
+		for(int i = 0; i < 1; i++){
 			Collections.shuffle(disciplinas);
 			
-			Individuo ind = new Individuo(disciplinas, salas);
+			Individuo ind = new Individuo(salas, disciplinas);
 			
 			
 			populacao.add(ind);
@@ -43,6 +50,7 @@ public class IA {
 		populacao.avaliacao();
 		System.out.println("fitness tamanho pop : "+ populacao.getFitnessTamanho());
 		System.out.println("fitness tipo pop: "+ populacao.getFitnessTipo());
+		
 		//Cruzamento - Elitista para
 		populacao.cruzamento();
 		
