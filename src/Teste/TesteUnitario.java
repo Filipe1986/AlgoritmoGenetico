@@ -4,14 +4,14 @@ package Teste;
 import static org.junit.Assert.*;
 
 
-import java.util.ArrayList;
+
 
 import org.junit.Test;
 
 import Modelo.Disciplina;
-import Modelo.Individuo;
+
 import Modelo.Gene;
-import Modelo.Populacao;
+
 import Modelo.Sala;
 
 public class TesteUnitario {
@@ -22,9 +22,9 @@ public class TesteUnitario {
 		Sala lab15 = new Sala("LAB 2", 15, "L");
 		
 		
-		Disciplina DLab30 = new Disciplina(1, "TP1", "BSI", "L", 30);
-		Disciplina DComum10 = new Disciplina(2, "TP2", "BSI", "C", 10);
-		Disciplina DOpt15 = new Disciplina(3, "PSW", "BSI", "F", 15);
+		Disciplina DLab30 = new Disciplina( "TP1", "BSI", "L", 30);
+		Disciplina DComum10 = new Disciplina("TP2", "BSI", "C", 10);
+		Disciplina DOpt15 = new Disciplina( "PSW", "BSI", "F", 15);
 		
 		Gene gene1 = new Gene(DLab30, comum10);
 		assertEquals(20, gene1.getFitnessTamanho());

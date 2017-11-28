@@ -1,18 +1,13 @@
 package Teste;
 
-import static org.junit.Assert.*;
 
-import java.util.ArrayList;
-import java.util.Collections;
 
 import org.junit.Test;
 
 import DAO.DAO;
-import Modelo.Disciplina;
+
 import Modelo.Individuo;
-import Modelo.Gene;
-import Modelo.Populacao;
-import Modelo.Sala;
+
 
 public class teste2 {
 
@@ -22,10 +17,11 @@ public class teste2 {
 		Individuo ind1 = DAO.populaIndividuo("sala1.xls", "disciplina1.xls");
 		
 		
-		Individuo ind2 = DAO.populaIndividuoShuffle("sala1.xls", "disciplina2.xls");
+		
+		Individuo ind2 = DAO.populaIndividuo("sala1.xls", "disciplina2.xls");
 		System.out.println(ind2);
 		System.out.println(ind2);
-		Individuo ind3 = DAO.populaIndividuoShuffle("sala2.xls", "disciplina1.xls");
+		Individuo ind3 = DAO.populaIndividuo("sala2.xls", "disciplina1.xls");
 
 		System.out.println(ind3);
 		/*		

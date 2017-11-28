@@ -1,21 +1,16 @@
 package Modelo;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class Populacao {
 
 	private ArrayList<Individuo> populacao;
-	private double fatorTamanho;
-	private double fatorTipo;
-	private int fitnessTamanho = 0;
-	private int fitnessTipo = 0;
 	
 
 	public Populacao() {
 		populacao = new ArrayList<>();
 	}
-
-
 
 	public void add(Individuo individuo) {
 		if (populacao.size() <= 0 ){
@@ -24,30 +19,19 @@ public class Populacao {
 		populacao.add(individuo);
 	}
 
-
-
 	public void avaliacao() {
-		int fitnessTamanho = 0;
-		int fitnessTipo = 0;
-		
+
+		int i = 0;
 		for (Individuo individuo : populacao) {
-			//System.err.println("Tamanho :"+ individuo.getFitnessTamanho()+ " Tipo :" + individuo.getFitnessTipo());
-			fitnessTamanho  += individuo.getFitnessTamanho();
-			fitnessTipo += individuo.getFitnessTipo();
+			i++;
+			//
+			System.out.println("ind "+  i + " fitness" + individuo.getFitnessTamanho() );
+			
+			//System.out.println(individuo);
+			
 		}
-		this.fitnessTamanho = fitnessTamanho / populacao.size();
-		this.fitnessTipo = fitnessTipo / populacao.size();
 		
-	}
-
-
-	public int getFitnessTamanho() {
-		return fitnessTamanho;
-	}
-
-
-	public int getFitnessTipo() {
-		return fitnessTipo;
+		
 	}
 
 
@@ -64,7 +48,44 @@ public class Populacao {
 	}
 	
 	
-	
+	@Override
+	public String toString() {
+		String pop = "";
+		for (Individuo individuo : populacao) {
+			pop += individuo.toString() + "\n";
+		}
+		pop += "\n\n";
+		
+		return pop;
+	}
+
+	public ArrayList<Individuo> getPopulacao() {
+		return populacao;
+	}
+
+	public Individuo getIndividuo(int i) {
+		return populacao.get(i);
+	}
+
+	public void orderByFitness() {
+		Collections.sort(populacao, new Comparator<Individuo>() {
+		    @Override
+		    public int compare(Individuo ind1, Individuo ind2) {
+		        return ind1.getFitnessTamanho().compareTo(ind2.getFitnessTamanho());
+		    }
+		});		
+		int i = 0;
+		for (Individuo individuo : populacao) {
+			i++;
+			//
+			System.out.println("ind "+  i + " fitness" + individuo.getFitnessTamanho() );
+			
+			//System.out.println(individuo);
+			
+		}
+		
+	}
+
 	
 	
 }

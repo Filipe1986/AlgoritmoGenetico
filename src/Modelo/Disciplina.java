@@ -3,15 +3,14 @@ package Modelo;
 public class Disciplina {
 
 	
-	private int    id;
+
 	private String nome;
 	private String curso;
 	private String  tipoSala;
 	private int    maxAlunos;
 	
-	public Disciplina(int id, String nome, String curso, String tipoSala, int maxAlunos) {
-		super();
-		this.id = id;
+	public Disciplina( String nome, String curso, String tipoSala, int maxAlunos) {
+
 		this.nome = nome;
 		this.curso = curso;
 		this.tipoSala = tipoSala;
@@ -23,16 +22,6 @@ public class Disciplina {
 	public String toString() {
 
 		return nome + " / Numeros de alunos "+ maxAlunos + " / curso: " + curso + " / tipoSala: "+ tipoSala  ;
-	}
-
-
-	public int getId() {
-		return id;
-	}
-
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 

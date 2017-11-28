@@ -3,7 +3,8 @@ package Modelo;
 public class Gene {
 	private Disciplina disciplina;
 	private Sala sala;
-	
+
+
 	final private String FACULTATIVO = "F";
 	final private String LABORATIRIO = "L";
 	final private String COMUM = "C";
@@ -14,7 +15,7 @@ public class Gene {
 		//Número negativo mais aluno que espaço
 		//Número positivo mais espaço do que aluno (Menor pior)
 	}
-
+	
 	public int getFitnessTipo() {
 		int fitnessTipo = 0;
 		
@@ -52,7 +53,13 @@ public class Gene {
 	}
 
 	public int getFitnessTamanho() {
+		
 		return  disciplina.getMaxAlunos() - sala.getCapacidade();
+	}
+	
+	@Override
+	public String toString() {
+		return sala.toString() + " \n"+ disciplina.toString()+ "\nfitness "+ getFitnessTamanho() + "\n";
 	}
 
 }
