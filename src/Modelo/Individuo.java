@@ -1,6 +1,7 @@
 package Modelo;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 
 public class Individuo{
@@ -113,7 +114,7 @@ public class Individuo{
 		return punicao;
 	}
 
-	public int quantidadePares() {
+	public int quantidadeGenes() {
 		return genes.size();
 	}
 
@@ -126,7 +127,7 @@ public class Individuo{
 
 	}
 
-	public Gene getPiorGene() {
+	public Gene getGeneMenosAdaptado() {
 		Gene pior = genes.get(0);
 
 		for (Gene gene : genes) {
@@ -136,6 +137,22 @@ public class Individuo{
 		}
 
 		return pior;
+	}
+	
+	public void Mutacao(int quantidadeMutacacoes){
+		Random random = new Random();
+		
+		for(int i = 0; i < quantidadeMutacacoes; i++){
+			
+			int posicaoGene = random.nextInt(genes.size());
+			int posicaoGene2 = random.nextInt(genes.size());
+			
+			Disciplina disciplina1 = genes.get(posicaoGene).getDisciplina();
+			genes.get(posicaoGene).setDisciplina(genes.get(posicaoGene2).getDisciplina());
+			genes.get(posicaoGene2).setDisciplina(disciplina1);
+			
+		}
+		
 	}
 
 }
