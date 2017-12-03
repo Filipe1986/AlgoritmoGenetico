@@ -1,6 +1,9 @@
 package Modelo;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Random;
 
 
@@ -139,7 +142,7 @@ public class Individuo{
 		return pior;
 	}
 	
-	public void Mutacao(int quantidadeMutacacoes){
+	public void mutacao(int quantidadeMutacacoes){
 		Random random = new Random();
 		
 		for(int i = 0; i < quantidadeMutacacoes; i++){
@@ -149,10 +152,64 @@ public class Individuo{
 			
 			Disciplina disciplina1 = genes.get(posicaoGene).getDisciplina();
 			genes.get(posicaoGene).setDisciplina(genes.get(posicaoGene2).getDisciplina());
-			genes.get(posicaoGene2).setDisciplina(disciplina1);
-			
+			genes.get(posicaoGene2).setDisciplina(disciplina1);			
 		}
 		
+	}
+
+
+	public Double getModuloFitness() {
+		
+		return Math.abs(getFitnessTamanho());
+
+	}
+	
+	public void trocaGene(int posicao , Disciplina disciplina){
+		
+		Disciplina disciplinaTroca = genes.get(posicao).getDisciplina();
+		genes.get(posicao).setDisciplina(disciplina);
+		for (Gene gene : genes) {
+			if (gene.getDisciplina().getNome().equals(disciplina.getNome())){
+				gene.setDisciplina(disciplinaTroca);
+			}
+		}
+		
+		
+		
+		
+	}
+
+
+	public int[] getPioresGenes(int quantidadeTrocaDeGenes) {
+		
+		
+
+		//ArrayList<Integer> posicaoPioresGenes = new ArrayList<>();
+		
+		int [] posicaoPioresGenes = new int[quantidadeTrocaDeGenes];
+		
+		ArrayList<Gene> piores = this.genes;
+		
+		Collections.sort(piores, new Comparator<Gene>() {
+		    @Override
+		    public int compare(Gene gene1, Gene gene2) {
+		    	
+		    	return 0;
+		    	//Faltando ajeitar a comparação dos genes, para ordenar e pegar as piores posicoes
+				//return ind1.getFitnessTamanho().compareTo(ind2.getFitnessTamanho());
+		    }
+		});	
+		
+		for (Gene gene : piores) {
+			for(int i = 0; i < quantidadeTrocaDeGenes; i++){
+				if (posicaoPioresGenes[i] < gene.getFitnessModulo())
+				posicaoPioresGenes[i]= 0;
+				
+			}
+		}
+		
+		
+		return null;
 	}
 
 }

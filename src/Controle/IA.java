@@ -36,9 +36,6 @@ public class IA {
 			
 			Individuo ind = new Individuo(salas, disciplinas);
 			populacao.add(ind);
-			
-			
-			
 		}
 		
 		populacao.avaliacao();

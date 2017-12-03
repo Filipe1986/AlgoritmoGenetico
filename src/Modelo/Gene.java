@@ -12,8 +12,8 @@ public class Gene {
 	public Gene(Disciplina disciplina, Sala sala) {
 		this.disciplina = disciplina;
 		this.sala = sala;
-		//Número negativo mais aluno que espaço
-		//Número positivo mais espaço do que aluno (Menor pior)
+		//Numero negativo mais aluno que espaco
+		//Numero positivo mais espaco do que aluno (Menor pior)
 	}
 	
 	public int getFitnessTipo() {
@@ -33,7 +33,9 @@ public class Gene {
 		}else{
 			//this.fitnessTipo = Integer.MAX_VALUE;
 		}
-		return fitnessTipo;
+		
+		//TODO 
+		return 0;
 	}
 
 	public Disciplina getDisciplina() {
@@ -60,6 +62,15 @@ public class Gene {
 	@Override
 	public String toString() {
 		return sala.toString() + " \n"+ disciplina.toString()+ "\nfitness "+ getFitnessTamanho() + "\n";
+	}
+	
+	public int getFitness(){
+		return getFitnessTamanho() + getFitnessTipo();
+		
+	}
+	
+	public int getFitnessModulo(){
+		return Math.abs(getFitness());
 	}
 
 }

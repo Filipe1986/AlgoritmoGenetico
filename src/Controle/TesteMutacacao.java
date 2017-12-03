@@ -10,7 +10,7 @@ public class TesteMutacacao {
 		
 		System.out.println(ind);
 		for(int i = 0; i < 100; i++){
-			ind.Mutacao(31);
+			ind.mutacao(31);
 			System.out.println(ind);
 		}
 	}
