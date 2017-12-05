@@ -20,20 +20,22 @@ public class Individuo{
 		// Mais disciplina do que sala
 		if (disciplinas.size() >= salas.size()) {
 			for (int i = 0; i < salas.size(); i++) {
+				disciplinas.get(i).setPosicao(i);
 				genes.add(new Gene(disciplinas.get(i), salas.get(i)));
 			}
 			for (int i = salas.size(); i < disciplinas.size(); i++) {
-
-				genes.add(new Gene(disciplinas.get(i), new Sala("-", 0, "-")));
+				disciplinas.get(i).setPosicao(i);
+				genes.add(new Gene(disciplinas.get(i), new Sala(i , "-", 0, "-")));
 			}
 			// Mais sala do que disciplina
 		} else {
 			for (int i = 0; i < disciplinas.size(); i++) {
+				disciplinas.get(i).setPosicao(i);
 				genes.add(new Gene(disciplinas.get(i), salas.get(i)));
 			}
 			for (int i = disciplinas.size(); i < salas.size(); i++) {
-				// System.out.println("Salas sem disciplinas");
-				genes.add(new Gene(new Disciplina("-", "-", "-", 0), salas.get(i)));
+				disciplinas.get(i).setPosicao(i);
+				genes.add(new Gene(new Disciplina( "-", "-", "-", 0), salas.get(i)));
 			}
 		}
 
@@ -73,11 +75,13 @@ public class Individuo{
 		for (Gene gene : genes) {
 			toString += gene.toString();
 		}
+		toString+= getFitnessTamanho();
 		toString += "\n--------------------------------------------------------------------------";
+		
 		return toString;
 	}
 
-	public int getFitnessTipo() {
+	private int getFitnessTipo() {
 
 		return calculaFitnessTipo();
 	}
@@ -93,18 +97,19 @@ public class Individuo{
 	}
 
 	public Double getFitnessTamanho() {
+		
 		Double punicao = genes.size() + 1.0;
 		
 		for (int i = 0; i < genes.size(); i++) {
 			double fitnessGene = genes.get(i).getFitnessTamanho();
 
 			if(fitnessGene > 0){
-				//System.out.println("Faltando espaÃ§o em sala");
+				//System.out.println("Faltando espacao em sala");
 				//Mais grave, valor deve ser maior
 				punicao *= fitnessGene;
 				punicao = punicao/4;
 			}else if(fitnessGene < 0){
-				//System.out.println("Sobrando espaÃ§o em sala");
+				//System.out.println("Sobrando espaco em sala");
 				
 				punicao *= fitnessGene;
 				punicao = punicao/15;
@@ -112,8 +117,9 @@ public class Individuo{
 				punicao *= 0.2;
 			}
 			
-			//System.out.println(fitnessGene);
+		
 		}
+		System.out.println("punicao" + punicao);
 		return punicao;
 	}
 
@@ -121,27 +127,7 @@ public class Individuo{
 		return genes.size();
 	}
 
-	public void analisaIndividuo() {
 
-		for (Gene gene : genes) {
-			System.out.println(gene.getDisciplina().getNome());
-
-		}
-
-	}
-
-	public Gene getGeneMenosAdaptado() {
-		Gene pior = genes.get(0);
-
-		for (Gene gene : genes) {
-			if (pior.getFitnessTamanho() < gene.getFitnessTamanho()) {
-				pior = gene;
-			}
-		}
-
-		return pior;
-	}
-	
 	public void mutacao(int quantidadeMutacacoes){
 		Random random = new Random();
 		
@@ -164,52 +150,61 @@ public class Individuo{
 
 	}
 	
-	public void trocaGene(int posicao , Disciplina disciplina){
+	public void trocaGene(int posicao , Disciplina disciplinaNova){
 		
-		Disciplina disciplinaTroca = genes.get(posicao).getDisciplina();
-		genes.get(posicao).setDisciplina(disciplina);
+		Disciplina disciplinaAntiga = genes.get(posicao).getDisciplina();
+		System.out.println("Entrou no troca gene");
+		
+		System.out.println("Disciplina antiga " + disciplinaAntiga);
+		System.out.println("Disciplina nova " + disciplinaNova);
+		
+		
 		for (Gene gene : genes) {
-			if (gene.getDisciplina().getNome().equals(disciplina.getNome())){
-				gene.setDisciplina(disciplinaTroca);
+			if (gene.getDisciplina().getNome().equals(disciplinaNova.getNome())){
+				//Troca a disciplina local do gene ruim de posicao
+				gene.setDisciplina(disciplinaAntiga);
+				//Setta a disciplina do gene ruim no bom
+				genes.get(posicao).setDisciplina(disciplinaNova);
+				
 			}
-		}
-		
-		
-		
-		
+		}	
 	}
 
 
 	public int[] getPioresGenes(int quantidadeTrocaDeGenes) {
 		
 		
-
-		//ArrayList<Integer> posicaoPioresGenes = new ArrayList<>();
+		ArrayList<Gene> piores = (ArrayList<Gene>) this.genes.clone();
 		
-		int [] posicaoPioresGenes = new int[quantidadeTrocaDeGenes];
 		
-		ArrayList<Gene> piores = this.genes;
+		
 		
 		Collections.sort(piores, new Comparator<Gene>() {
 		    @Override
 		    public int compare(Gene gene1, Gene gene2) {
-		    	
-		    	return 0;
-		    	//Faltando ajeitar a comparação dos genes, para ordenar e pegar as piores posicoes
-				//return ind1.getFitnessTamanho().compareTo(ind2.getFitnessTamanho());
+		    	return gene1.getFitnessDouble().compareTo(gene2.getFitnessDouble());
+
 		    }
 		});	
-		
-		for (Gene gene : piores) {
-			for(int i = 0; i < quantidadeTrocaDeGenes; i++){
-				if (posicaoPioresGenes[i] < gene.getFitnessModulo())
-				posicaoPioresGenes[i]= 0;
-				
-			}
+
+		int [] posicaoPioresGenes = new int[quantidadeTrocaDeGenes];
+		for(int i = 0; i < quantidadeTrocaDeGenes/2; i++){
+			//System.out.println("piores " + piores.get(i).getDisciplina().getPosicao());
+			posicaoPioresGenes[i] = piores.get(i).getDisciplina().getPosicao();
 		}
 		
+		for(int i = quantidadeTrocaDeGenes/2; i < quantidadeTrocaDeGenes; i++){
+			//System.out.println("Outra ponta" + piores.get(i).getDisciplina().getPosicao());
+			
+			posicaoPioresGenes[i] = piores.get(piores.size() - i).getDisciplina().getPosicao();
+		}
 		
-		return null;
+		return posicaoPioresGenes;
+	}
+
+
+	public Disciplina getDisciplinaPorPosicao(int i) {
+		return genes.get(i).getDisciplina();
 	}
 
 }

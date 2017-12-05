@@ -12,8 +12,6 @@ public class Gene {
 	public Gene(Disciplina disciplina, Sala sala) {
 		this.disciplina = disciplina;
 		this.sala = sala;
-		//Numero negativo mais aluno que espaco
-		//Numero positivo mais espaco do que aluno (Menor pior)
 	}
 	
 	public int getFitnessTipo() {
@@ -71,6 +69,11 @@ public class Gene {
 	
 	public int getFitnessModulo(){
 		return Math.abs(getFitness());
+	}
+
+	public Double getFitnessDouble() {
+		return getFitness() * 1.0;
+		
 	}
 
 }

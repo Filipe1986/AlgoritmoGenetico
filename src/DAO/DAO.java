@@ -35,7 +35,7 @@ public class DAO {
 
 			String tipo = planilha.getCell(2, i).getContents();
 
-			Sala sala = new Sala(nome, capacidade, tipo);
+			Sala sala = new Sala(i, nome, capacidade, tipo);
 			salas.add(sala);
 
 		}

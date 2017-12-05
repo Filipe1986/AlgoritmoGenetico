@@ -11,6 +11,9 @@ public class Populacao {
 	public Populacao() {
 		populacao = new ArrayList<>();
 	}
+	public Populacao(ArrayList<Individuo> populacao){
+		this.populacao = populacao;
+	}
 
 	public void add(Individuo individuo) {
 		if (populacao.size() <= 0 ){
@@ -86,49 +89,9 @@ public class Populacao {
 		
 	}
 	
-	public void selecaoPorTorneio(){
-		ArrayList<Individuo> proximaGeracao = new ArrayList<>();
-		
-		
-		
-		
-		
-		
-	}
+
 	
-	public Individuo cruzamentoPorTorneio(Individuo pai, Individuo mae, int quantidadeTrocaDeGenes){
-		
-		Individuo[] pais = new Individuo[2];
-		pais[0] = pai;
-		pais[1] = mae;
-		
-				
-		Individuo filho;
-		Double moduloFitnessPai = pai.getModuloFitness();
-		Double moduloFitnessMae = mae.getModuloFitness();
-		int melhorIndividuo = -1;
-		int piorIndividuo = -1;
-		
-		
-		//Filho tem como base o parente mais saudável
-		if (moduloFitnessPai < moduloFitnessMae ){
-			melhorIndividuo = 0;
-			piorIndividuo = 1;
-		}else{
-			melhorIndividuo = 1;
-			piorIndividuo = 0;
-		}
-		filho = pais[melhorIndividuo];
-		
-		int [] posicaoPioresGenes = filho.getPioresGenes(quantidadeTrocaDeGenes); 
-		
-		//filho.trocaGene(posicao, disciplina);
-		
-		
-		
-		return filho;
-	}
-	
+
 	
 
 	

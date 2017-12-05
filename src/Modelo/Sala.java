@@ -2,12 +2,13 @@ package Modelo;
 
 public class Sala {
 	
+	private int id;
 	private String nome;
 	private int capacidade;
 	private String tipo;
 	
-	public Sala(String nome, int capacidade, String tipo) {
-
+	public Sala(int id, String nome, int capacidade, String tipo) {
+		this.id = id;
 		this.nome = nome;
 		this.capacidade = capacidade;
 		this.tipo = tipo;

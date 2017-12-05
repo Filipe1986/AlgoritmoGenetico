@@ -3,14 +3,14 @@ package Modelo;
 public class Disciplina {
 
 	
-
+	private int posicao;
 	private String nome;
 	private String curso;
 	private String  tipoSala;
 	private int    maxAlunos;
 	
 	public Disciplina( String nome, String curso, String tipoSala, int maxAlunos) {
-
+		//this.posicao = posicao;
 		this.nome = nome;
 		this.curso = curso;
 		this.tipoSala = tipoSala;
@@ -18,10 +18,20 @@ public class Disciplina {
 	}
 
 	
+	public int getPosicao() {
+		return posicao;
+	}
+
+
+	public void setPosicao(int posicao) {
+		this.posicao = posicao;
+	}
+
+
 	@Override
 	public String toString() {
 
-		return nome + " / Numeros de alunos "+ maxAlunos + " / curso: " + curso + " / tipoSala: "+ tipoSala  ;
+		return "posicao "+  posicao + " " + nome + " / Numeros de alunos "+ maxAlunos + " / curso: " + curso + " / tipoSala: "+ tipoSala  ;
 	}
 
 

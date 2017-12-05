@@ -19,50 +19,34 @@ public class IA {
 		String arquivoSala = "tabela_sala.xls";
 		String arqvuivoDisciplina = "tabela_disciplina.xls";
 		
-		ArrayList< Sala> salas = DAO.populaSala(arquivoSala);
-		ArrayList <Disciplina> disciplinas = DAO.populaDisciplinas(arqvuivoDisciplina);
+		String salaTeste = "sala1.xls";
+		String disciplinaTeste = "disciplina1.xls";
+		
+		ArrayList< Sala> salas = DAO.populaSala(salaTeste);
+		ArrayList <Disciplina> disciplinas = DAO.populaDisciplinas(disciplinaTeste);
 		
 		
 		if(disciplinas.size() > salas.size()){
-			System.err.println("Solução impossível pois o numero de disciplinas é maior do que o de salas \n"
-					+ "Buscando solução razoável...");
+			System.err.println("Solucao impossivel pois o numero de disciplinas maior do que o de salas \n"
+					+ "Buscando solucao razoavel...");
 			
 		}
 		
 		Populacao populacao = new Populacao();
-		for(int i = 0; i < 10; i++){
+		for(int i = 0; i < 16; i++){
 			
 			Collections.shuffle(salas);
 			
-			Individuo ind = new Individuo(salas, disciplinas);
+			Individuo ind = DAO.populaIndividuoShuffle(salaTeste, disciplinaTeste);
 			populacao.add(ind);
 		}
-		
-		populacao.avaliacao();
-		Scanner ler = new Scanner(System.in);
-		int n = 1;
-		while(n != 0 ){
-		System.out.printf("Imprimir qual individuo? ");
-		n = ler.nextInt();
-		
-		System.out.println(populacao.getIndividuo(n));
-		
-		}
-		ler.close();
 
-		//System.out.println("fitness tamanho pop : "+ populacao.getFitnessTamanho());
-		//System.out.println("fitness tipo pop: "+ populacao.getFitnessTipo());
 		
 		//Cruzamento - Elitista para
-		populacao.cruzamento();
+		SelecaoPorTorneio selecao = new SelecaoPorTorneio();
+		Individuo ind = selecao.selecaoPorTorneio(populacao, 2);
 		
-		//Selecao - 
-		populacao.selecao();
-
-		
-		
-		//log dos resultados
-
+		System.out.println(ind);
 	}
 
 }
