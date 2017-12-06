@@ -93,7 +93,7 @@ public class DAO {
 		ArrayList<Disciplina> disciplinas = populaDisciplinas(arqvuivoDisciplina);
 
 		Collections.shuffle(disciplinas);
-		Collections.shuffle(disciplinas);
+		//Collections.shuffle(disciplinas);
 
 		return disciplinas;
 	}

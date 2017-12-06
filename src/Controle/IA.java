@@ -1,14 +1,16 @@
 package Controle;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Scanner;
+
 
 import DAO.DAO;
 import Modelo.Disciplina;
 import Modelo.Individuo;
 import Modelo.Populacao;
 import Modelo.Sala;
+import Modelo.SelecaoPorTorneio;
 import jxl.read.biff.BiffException;
 
 public class IA {
@@ -19,8 +21,8 @@ public class IA {
 		String arquivoSala = "tabela_sala.xls";
 		String arqvuivoDisciplina = "tabela_disciplina.xls";
 		
-		String salaTeste = "sala1.xls";
-		String disciplinaTeste = "disciplina1.xls";
+		String salaTeste = "sala2.xls";
+		String disciplinaTeste = "disciplina2.xls";
 		
 		ArrayList< Sala> salas = DAO.populaSala(salaTeste);
 		ArrayList <Disciplina> disciplinas = DAO.populaDisciplinas(disciplinaTeste);
@@ -32,21 +34,26 @@ public class IA {
 			
 		}
 		
+		System.out.println(SimpleDateFormat.getTimeInstance().getCalendar().getTime());
 		Populacao populacao = new Populacao();
-		for(int i = 0; i < 16; i++){
+		for(int i = 0; i < 4; i++){
 			
 			Collections.shuffle(salas);
 			
-			Individuo ind = DAO.populaIndividuoShuffle(salaTeste, disciplinaTeste);
+			Individuo ind = new Individuo(salas, disciplinas);
+			//Individuo ind = DAO.populaIndividuo(salaTeste, disciplinaTeste);
 			populacao.add(ind);
 		}
 
 		
 		//Cruzamento - Elitista para
 		SelecaoPorTorneio selecao = new SelecaoPorTorneio();
-		Individuo ind = selecao.selecaoPorTorneio(populacao, 2);
+		Individuo ind = selecao.selecaoPorTorneio(populacao, 5);
 		
 		System.out.println(ind);
+	
+		
+		
 	}
 
 }

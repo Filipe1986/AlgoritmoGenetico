@@ -119,7 +119,7 @@ public class Individuo{
 			
 		
 		}
-		System.out.println("punicao" + punicao);
+		//System.out.println("punicao" + punicao);
 		return punicao;
 	}
 
@@ -143,7 +143,6 @@ public class Individuo{
 		
 	}
 
-
 	public Double getModuloFitness() {
 		
 		return Math.abs(getFitnessTamanho());
@@ -153,7 +152,7 @@ public class Individuo{
 	public void trocaGene(int posicao , Disciplina disciplinaNova){
 		
 		Disciplina disciplinaAntiga = genes.get(posicao).getDisciplina();
-		System.out.println("Entrou no troca gene");
+		//System.out.println("Entrou no troca gene");
 		
 		System.out.println("Disciplina antiga " + disciplinaAntiga);
 		System.out.println("Disciplina nova " + disciplinaNova);
@@ -162,10 +161,13 @@ public class Individuo{
 		for (Gene gene : genes) {
 			if (gene.getDisciplina().getNome().equals(disciplinaNova.getNome())){
 				//Troca a disciplina local do gene ruim de posicao
+				
 				gene.setDisciplina(disciplinaAntiga);
 				//Setta a disciplina do gene ruim no bom
+				
 				genes.get(posicao).setDisciplina(disciplinaNova);
 				
+				System.out.println("Entrouuuuuuuuuuuuuu");
 			}
 		}	
 	}
@@ -175,9 +177,6 @@ public class Individuo{
 		
 		
 		ArrayList<Gene> piores = (ArrayList<Gene>) this.genes.clone();
-		
-		
-		
 		
 		Collections.sort(piores, new Comparator<Gene>() {
 		    @Override
